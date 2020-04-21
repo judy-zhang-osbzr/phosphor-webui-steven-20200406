@@ -199,9 +199,6 @@ window.angular && (function(angular) {
 	  
 	  ///arrow loop
 	  var index = 0;
-      /* var imgElement = document.getElementById("imgs").getElementsByTagName("li");
-      console.log(imgElement);
-      var imgLen = imgElement.length; */
       $scope.moveNext = function(arrow){
 		  $scope.ssdFlag = false;
           $scope.cableFlag = false;
@@ -212,6 +209,7 @@ window.angular && (function(angular) {
 		  $scope.patopoFlag = false;
 		  $scope.ipFlag = false;
 
+          // Reload
           var imgElement = document.getElementById("imgs").getElementsByTagName("li");
           console.log(imgElement);
           var imgLen = imgElement.length;
@@ -220,10 +218,6 @@ window.angular && (function(angular) {
 			if (index == imgLen){
 				index = 0; // The first image
 			}
-            console.log(index-1);
-            console.log(angular.element(imgElement));
-            console.log(angular.element(imgElement).eq(index-1));
-            console.log(angular.element(imgElement).eq(index-1).addClass('img_display'));
 			angular.element(imgElement).eq(index-1).addClass('img_display');
 			angular.element(imgElement).eq(index).removeClass('img_display');
 		  }else if(arrow == 'left'){
@@ -238,14 +232,6 @@ window.angular && (function(angular) {
 			}
 			angular.element(imgElement).eq(index).removeClass('img_display');
 		  }
-          /* else if(arrow == 'init'){
-              console.log("init start");
-              /* console.log(index);
-              console.log(angular.element(imgElement));
-              console.log(angular.element(imgElement).eq(index));
-              console.log(angular.element(imgElement).eq(index).addClass('img_display')); 
-              console.log("init end");
-          } */
 	  };
 	   
 	  // Get mouse relative position
@@ -307,7 +293,6 @@ window.angular && (function(angular) {
             }); 
 	  };
 
-      //$scope.moveNext('init');
       $scope.loadSsdInfo();
       $scope.loadPowerSupplyInfo();
 	  $scope.loadFanSensorData();
