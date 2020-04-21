@@ -1,6 +1,6 @@
-$logoHeight: 30px;
+$logoHeight: 60px;
 $logoMaxHeight: 100px;
-$logoMaxWidth: 125px;
+$logoMaxWidth: 300px;
 
 @mixin round-corners {
   -webkit-border-radius: 6px 6px;
@@ -54,7 +54,7 @@ $logoMaxWidth: 125px;
   display: block;
   position: relative;
   overflow: hidden;
-  min-height: 5em;
+  min-height: 4em;
   border-bottom: 1px solid $border-color-01;
   background: $primary-light;
   .header__server-name {
@@ -83,7 +83,7 @@ $logoMaxWidth: 125px;
 
   .header__logo {
     vertical-align: middle;
-    margin: 1em;
+    margin: 0em;
     float: left;
     height: $logoHeight; //required for <SVG> logos - can remove if using img
     max-height: $logoMaxHeight;
@@ -222,11 +222,31 @@ $logoMaxWidth: 125px;
       margin-right: auto;
     }
     svg {
-      width: 25px;
-      height: auto;
+      width: 48px;
+      height: 48px;
       fill: $primary-accent;
     }
   }
-}
+  
+  
 
+ .ng-logout{
+	width:45px;
+	height:45px;
+    margin-right: 10px;
+	svg{
+	  width: 45px;
+      height: 45px;
+      fill: $primary-accent;
+	}
+  }
+  .btn-logout{
+    padding-left: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 2px;
+  }
+  
+}
+ 
 // end header__functions-section

@@ -6,8 +6,8 @@
     * @name ssdArrayController
     *
     *
-    * @author Judy
-    * @date   20190524
+    * @author Steven & Judy
+    * @date   20200417
     * @brief  ssd inventory operations modify base the file of power usage controller
 */
 
@@ -26,6 +26,8 @@ window.angular && (function(angular) {
           $scope.psFlag = false;
 		  $scope.psxFlag = false;
 		  $scope.fanFlag = false;
+		  $scope.patopoFlag = false;
+		  $scope.ipFlag = false;
           if(flag == 'ssd'){
               $scope.ssdFlag = true;
           }else if(flag == 'cable'){
@@ -38,11 +40,13 @@ window.angular && (function(angular) {
               $scope.psxFlag = true;
           }else if(flag == 'fan'){
               $scope.fanFlag = true;
+          }else if(flag == 'patopo'){ 
+              $scope.patopoFlag = true;
+          }else if(flag == 'ip'){
+              $scope.ipFlag = true;
           }
       };
 	  
-      var arrayInfo=[];
-      var PSInfo=[];
 	  $scope.leave = function(id){
 		  $scope.ssdFlag = false;
           $scope.cableFlag = false;
@@ -50,31 +54,30 @@ window.angular && (function(angular) {
           $scope.psFlag = false;
 		  $scope.psxFlag = false;
 		  $scope.fanFlag = false;
+		  $scope.patopoFlag = false;
+		  $scope.ipFlag = false;
 	      var lab = document.getElementById(id);
-		  console.log('leave');
-		  console.log(lab);
 		  lab.style.display = "none";
 	  };
-	  
+	 
+      var arrayInfo=[];
+      var PSInfo=[];
 	  ///ssd information
       $scope.SSD = function(num){
       angular.forEach(arrayInfo['Ssdinfo'], function(ssdInfo, ssdNum){
-        console.log(ssdInfo);
-        console.log(ssdNum);
         if(angular.equals(ssdNum, num)){
-            console.log('equal');
 			$scope.ssdNo=ssdNum;
 			$scope.ssdx=ssdInfo;
 			changeStatus('ssd');
-			
+						
 			var lab = document.getElementById('usi-ssd');
-			var windowEvent = window.event;               ///Get windowEvent
-			var mousePosition = getMousePos(windowEvent); ///Get mouse position
+			var mousePosition = getMousePos(window.event); ///Get mouse position
 			lab.style.position = "absolute";
-			lab.style.display="inline-table";
-			lab.style.left = mousePosition.x  + 'px';
-			lab.style.top = mousePosition.y  + 'px';	
-			console.log(lab);
+			lab.style.display = "block";
+			lab.style.left = mousePosition.x + 5 + 'px';
+			lab.style.top = mousePosition.y  + 5 +  'px';
+			lab.style.height = '0px';
+			lab.style.width = '0px';	
         }
       });
     };
@@ -83,87 +86,106 @@ window.angular && (function(angular) {
     $scope.PowerSupply = function(name) {		
 		
 		if(angular.equals(name, 'PS')) {
-			changeStatus('ps');	
-			var lab=document.getElementById('usi-ps');
-			//var windowEvent = window.event;               ///Get windowEvent
+			changeStatus('ps');
+			$scope.psinfo=PSInfo['Status'];	
+			var lab = document.getElementById('usi-ps');
 			var mousePosition = getMousePos(window.event); ///Get mouse position
 			lab.style.position = "absolute";
-			lab.style.display="inline-table";
-			lab.style.left = mousePosition.x + 'px';
-			lab.style.top = mousePosition.y + 'px';
-			$scope.psinfo=PSInfo['Status'];
-			console.log(lab);
-			console.log($scope.psinfo);
+			lab.style.display = "block";
+			lab.style.left = mousePosition.x + 5 + 'px';
+			lab.style.top = mousePosition.y + 5 + 'px';
+			lab.style.height = '0px';
+			lab.style.width = '0px';
 		}else{
-			angular.forEach(PSInfo['Status'], function(psInfo, psName) {
-				changeStatus('psx');	
-				var lab=document.getElementById('usi-psx');
-				//var windowEvent = window.event;               ///Get windowEvent
-				var mousePosition = getMousePos(window.event); ///Get mouse position
-				lab.style.position = "absolute";
-				lab.style.display='inline-table';
-				lab.style.left = mousePosition.x + 'px';
-				lab.style.top = mousePosition.y + 'px';
-				console.log(lab);
+			angular.forEach(PSInfo['Status'], function(psInfo, psName) {				
 				if(angular.equals(psName, name)) {
+					changeStatus('psx');				
 					$scope.psname=psName;
 					$scope.psinfo=psInfo;
-					console.log($scope.psinfo);
+					var lab = document.getElementById('usi-psx');
+					var mousePosition = getMousePos(window.event); ///Get mouse position
+					lab.style.position = "absolute";
+					lab.style.display= "block";
+					lab.style.height = '0px';
+					lab.style.width = '0px';
+					lab.style.left = mousePosition.x + 5 + 'px';
+					lab.style.top = mousePosition.y + 5 + 'px';
 				}
 			});
 		}
     };
 
 	///cable information
-	$scope.Cable = function(name) {
+	$scope.Cable = function() {
 		changeStatus('cable');
-		console.log(name);
-        console.log(arrayInfo);
-		$scope.cableinfo=arrayInfo['Cableinfo'];
-		var lab=document.getElementById('usi-cable');
-		//var windowEvent = window.event;               ///Get windowEvent
+		$scope.cableinfo = arrayInfo['Cableinfo'];
+		var lab = document.getElementById('usi-cable');
 		var mousePosition = getMousePos(window.event); ///Get mouse position
+		
 		lab.style.position = "absolute";
-		lab.style.display="block";
-		lab.style.left = mousePosition.x + 'px';
-		lab.style.top = mousePosition.y + 'px';
-		console.log(mousePosition.x + 'px');
-		console.log(mousePosition.y + 'px');
-		console.log(lab); 
+		lab.style.display = "block";
+		lab.style.left = mousePosition.x + 5 + 'px';
+		lab.style.top = mousePosition.y + 5 + 'px';
+		lab.style.height = '0px';
+		lab.style.width = '0px';
 	};
 	
 	///switch information
-	$scope.Switch = function(name) {
+	$scope.Switch = function() {
 		changeStatus('sw');
 		$scope.swinfo = arrayInfo['Swinfo'];
 		var lab = document.getElementById('usi-switch');
-		//var windowEvent = window.event;              ///Get windowEvent
 		var mousePosition = getMousePos(window.event); ///Get mouse position
 		lab.style.position = "absolute";
-		lab.style.display='table';		
-		lab.style.left = mousePosition.x + 'px';
-		lab.style.top = mousePosition.y + 'px';
-		console.log(mousePosition.x + 'px');
-		console.log(mousePosition.y + 'px');
-		console.log(lab); 
+		lab.style.display = "block";
+		lab.style.height = '0px';
+		lab.style.width = '0px';	
+		lab.style.left = mousePosition.x + 5 + 'px';
+		lab.style.top = mousePosition.y + 5 + 'px';
+		
 	};
 	
-	
-	  	///fan sensor information
-	$scope.Fan = function(name) {
-		changeStatus('fan');
-		console.log(name);
-		console.log(fanData);
-		
-		var lab=document.getElementById('usi-fan');
-		//var windowEvent = window.event;               ///Get windowEvent
+	$scope.Patopo = function() {
+		changeStatus('patopo');
+		$scope.patopoinfo = arrayInfo['Patopoinfo'];
+		var lab = document.getElementById('usi-patopo');
 		var mousePosition = getMousePos(window.event); ///Get mouse position
 		lab.style.position = "absolute";
-		lab.style.display='inline-table';
-		lab.style.left = mousePosition.x + 'px';
-		lab.style.top = mousePosition.y + 'px'; 
-		console.log(lab);
-
+		lab.style.display = "block";
+		lab.style.height = '0px';
+		lab.style.width = '0px';
+		lab.style.left = mousePosition.x + 5 + 'px';
+		lab.style.top = mousePosition.y + 5 + 'px';
+		console.log("patopo"); 
+		console.log($scope.patopoinfo); 
+	};
+	
+	$scope.Ip = function() {
+		changeStatus('ip');
+		var lab = document.getElementById('usi-ip');
+		var mousePosition = getMousePos(window.event); ///Get mouse position
+		lab.style.position = "absolute";
+		lab.style.display = "block";
+		lab.style.height = '0px';
+		lab.style.width = '0px';
+		lab.style.left = mousePosition.x + 5 + 'px';
+		lab.style.top = mousePosition.y + 5 + 'px';
+		console.log("ip"); 
+		console.log($scope.bmc_ip_addresses); 
+	};
+	
+	///fan sensor information
+	$scope.Fan = function(name) {
+		changeStatus('fan');
+		var lab = document.getElementById('usi-fan');
+		var mousePosition = getMousePos(window.event); ///Get mouse position
+		lab.style.position = "absolute";
+		lab.style.display = "block";
+		lab.style.left = mousePosition.x + 5 + 'px';
+		lab.style.top = mousePosition.y + 5 + 'px'; 
+		lab.style.height = '0px';
+		lab.style.width = '0px';
+		
 		for(var i = 0; i < fanData.length; i++){
 			if(fanData[i].title.indexOf(name+' INLET') != -1) {
 				$scope.faninfoIN=fanData[i];
@@ -174,13 +196,21 @@ window.angular && (function(angular) {
 			}
 		}
 	  };
-	
+	  
 	  ///arrow loop
 	  var index = 0;
       var imgElement = document.getElementById("imgs").getElementsByTagName("li");
 	  console.log(imgElement);
       var imgLen = imgElement.length;
       $scope.moveNext = function(arrow){
+		  $scope.ssdFlag = false;
+          $scope.cableFlag = false;
+          $scope.switchFlag = false;
+          $scope.psFlag = false;
+		  $scope.psxFlag = false;
+		  $scope.fanFlag = false;
+		  $scope.patopoFlag = false;
+		  $scope.ipFlag = false;
 		  if(arrow == 'right'){
 			index++;
 			if (index == imgLen){
@@ -201,7 +231,6 @@ window.angular && (function(angular) {
 			angular.element(imgElement).eq(index).removeClass('img_display');
 		  }
 	  };
-
 	   
 	  // Get mouse relative position
       function getMousePos(event) {
@@ -214,28 +243,10 @@ window.angular && (function(angular) {
 		  return { 'x': x, 'y': y };
       }
 	
-	
       $scope.loadSsdInfo = function(){
         UsiAPIUtils.getSsdArrayInfo().then(
             function(data){
                 arrayInfo = data;
-                /*   $scope.ssdinfo = arrayInfo['Ssdinfo'];
-                }
-                if (arrayInfo.hasOwnProperty('Cableinfo')){
-                    $scope.cableinfo = arrayInfo['Cableinfo'];
-                }
-                if (arrayInfo.hasOwnProperty('Dspinfo')){
-                    $scope.dspinfo = arrayInfo['Dspinfo'];
-                }
-                if (arrayInfo.hasOwnProperty('Patopoinfo')){
-                    $scope.patopoinfo = arrayInfo['Patopoinfo'];
-                }
-                if (arrayInfo.hasOwnProperty('Swinfo')){
-                    $scope.swinfo = arrayInfo['Swinfo'];
-                }
-                if (arrayInfo.hasOwnProperty('Bindinfo')){
-                    $scope.bindinfo = arrayInfo['Bindinfo'];
-                } */
             },
             function(error) {
                toastService.error('Error during getSsdArrayInfo');
@@ -248,9 +259,6 @@ window.angular && (function(angular) {
         UsiAPIUtils.getPowerSupplyInfo().then(
             function(data){
                 PSInfo = data;
-                /* if (psinfo.hasOwnProperty('Status')){
-                    $scope.psinfo = psinfo['Status'];
-                } */
             },
             function(error) {
                toastService.error('Error during get PowerSupplyInfo');
@@ -258,24 +266,35 @@ window.angular && (function(angular) {
         );
       };
 	  
-	  
       var fanData = [];
 	  $scope.loadFanSensorData = function(){
           APIUtils.getAllSensorStatus(function(data, originalData) {
               for(var i = 0; i < data.length; i++){
                   if(data[i].title.indexOf('Fan') != -1 &&  data[i].title.indexOf('Tach') != -1){
                       fanData.push(data[i]);
-					  console.log(data[i]);
-					  console.log(data[i].title);
                   }
               }
-              
          });
+	  };
+	  
+	  $scope.bmc_ip_addresses = [];
+	  $scope.loadNetworkInfo = function(){
+		 APIUtils.getNetworkInfo().then(
+            function(data) {
+              // TODO: openbmc/openbmc#3150 Support IPV6 when
+              // officially supported by the backend
+              $scope.bmc_ip_addresses = data.formatted_data.ip_addresses.ipv4;
+              //$scope.newHostname = data.hostname;
+            },
+            function(error) {
+              console.log(JSON.stringify(error));
+            }); 
 	  };
 
       $scope.loadSsdInfo();
       $scope.loadPowerSupplyInfo();
 	  $scope.loadFanSensorData();
+	  $scope.loadNetworkInfo ();
     }
   ]);
 })(angular);
