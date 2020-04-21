@@ -237,14 +237,15 @@ window.angular && (function(angular) {
 				angular.element(imgElement).eq(index+1).addClass('img_display');
 			}
 			angular.element(imgElement).eq(index).removeClass('img_display');
-		  }else if(arrow == 'init'){
+		  }
+          /* else if(arrow == 'init'){
               console.log("init start");
               /* console.log(index);
               console.log(angular.element(imgElement));
               console.log(angular.element(imgElement).eq(index));
-              console.log(angular.element(imgElement).eq(index).addClass('img_display')); */
+              console.log(angular.element(imgElement).eq(index).addClass('img_display')); 
               console.log("init end");
-          }
+          } */
 	  };
 	   
 	  // Get mouse relative position
@@ -306,7 +307,7 @@ window.angular && (function(angular) {
             }); 
 	  };
 
-      $scope.moveNext('init');
+      //$scope.moveNext('init');
       $scope.loadSsdInfo();
       $scope.loadPowerSupplyInfo();
 	  $scope.loadFanSensorData();
