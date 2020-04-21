@@ -199,7 +199,9 @@ window.angular && (function(angular) {
 	  
 	  ///arrow loop
 	  var index = 0;
-      
+      var imgElement = document.getElementById("imgs").getElementsByTagName("li");
+      console.log(imgElement);
+      var imgLen = imgElement.length;
       $scope.moveNext = function(arrow){
 		  $scope.ssdFlag = false;
           $scope.cableFlag = false;
@@ -210,9 +212,9 @@ window.angular && (function(angular) {
 		  $scope.patopoFlag = false;
 		  $scope.ipFlag = false;
 
-          var imgElement = document.getElementById("imgs").getElementsByTagName("li");
+          /* var imgElement = document.getElementById("imgs").getElementsByTagName("li");
           console.log(imgElement);
-          var imgLen = imgElement.length;
+          var imgLen = imgElement.length; */
 		  if(arrow == 'right'){
 			index++;
 			if (index == imgLen){
@@ -237,10 +239,10 @@ window.angular && (function(angular) {
 			angular.element(imgElement).eq(index).removeClass('img_display');
 		  }else if(arrow == 'init'){
               console.log("init start");
-              console.log(index);
+              /* console.log(index);
               console.log(angular.element(imgElement));
               console.log(angular.element(imgElement).eq(index));
-              console.log(angular.element(imgElement).eq(index).addClass('img_display'));
+              console.log(angular.element(imgElement).eq(index).addClass('img_display')); */
               console.log("init end");
           }
 	  };
