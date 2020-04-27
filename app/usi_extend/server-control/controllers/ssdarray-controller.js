@@ -208,11 +208,9 @@ window.angular && (function(angular) {
 		  $scope.fanFlag = false;
 		  $scope.patopoFlag = false;
 		  $scope.ipFlag = false;
-
-          // Reload
-          var imgElement = document.getElementById("imgs").getElementsByTagName("li");
-          console.log(imgElement);
-          var imgLen = imgElement.length;
+		  
+		  var imgElement = document.getElementById("imgs").getElementsByTagName("li");
+		  var imgLen = imgElement.length;
 		  if(arrow == 'right'){
 			index++;
 			if (index == imgLen){

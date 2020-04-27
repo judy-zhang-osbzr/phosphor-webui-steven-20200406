@@ -47,6 +47,11 @@ window.angular && (function(angular) {
                 'controller': 'sysLogController',
                 authenticated: true
               })
+			  .when('/server-health/partition', {
+                'template': require('../usi_extend/server-control/controllers/partition-controller.html'),
+                'controller': 'partitionController',
+                authenticated: true
+              })
               .when('/server-health', {
                 'template': require('./controllers/log-controller.html'),
                 'controller': 'logController',

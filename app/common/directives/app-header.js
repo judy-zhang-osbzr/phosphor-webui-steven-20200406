@@ -125,7 +125,7 @@ window.angular && (function(angular) {
                 }
               });
             };
-
+			
             $scope.refresh = function() {
               // reload current page controllers and header
               loadData();
